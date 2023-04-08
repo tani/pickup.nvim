@@ -9,11 +9,11 @@ function M.setup(_opts)
   }
   M.opts = {
     hl_group = opts.hl_group or default.hl_group,
-    border = opts.border or default.border
-    lhs = opts.border or default.lhs
+    border = opts.border or default.border,
+    lhs = opts.lhs or default.lhs
   }
   if M.opts.lhs ~= '' then
-    vim.keymap.set('n', lhs, M.pickup, {})
+    vim.keymap.set('n', M.opts.lhs, M.pickup, {})
   end
 end
 
