@@ -1,7 +1,7 @@
 local M = {}
 
 function M.setup(_opts)
-  M.opts = vim.tbl_extend(_opts, {
+  M.opts = vim.tbl_extend('keep', _opts or {}, {
     hl_group = 'DiffAdd',
     border = { style = 'rounded' },
     lhs = '<C-p>'
