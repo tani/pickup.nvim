@@ -2,8 +2,10 @@ local M = {}
 
 function M.setup(_opts)
   M.opts = vim.tbl_extend('keep', _opts or {}, {
-    hl_group = 'DiffAdd',
-    border = { style = 'rounded' },
+    match_hl_group = 'DiffAdd',
+    select_hl_group = 'PmenuSel',
+    border_hl_group = 'FloatBorder',
+    border_style = 'rounded',
     lhs = '<C-p>'
   })
   if M.opts.lhs ~= '' then
@@ -19,7 +21,7 @@ function M.pickup()
   local event = require('nui.utils.autocmd').event
   local path = ""
   local popup = Popup({
-    border = M.opts.border,
+    border = { style = M.opts.border_style },
     position = {
       row = 5,
       col = '50%'
@@ -27,6 +29,9 @@ function M.pickup()
     size = {
       width = '50%',
       height = '60%'
+    },
+    win_options = {
+      winhighlight = "Normal:Normal,FloatBorder:" .. M.opts.border_hl_group
     }
   })
   popup:mount()
@@ -38,7 +43,10 @@ function M.pickup()
     size = {
       width = '50%'
     },
-    border = M.opts.border,
+    border = { style = M.opts.border_style },
+    win_options = {
+      winhighlight = "Normal:Normal,FloatBorder:" .. M.opts.border_hl_group
+    }
   }, {
     prompt = 'pattern: ',
     on_submit = function()
@@ -65,7 +73,7 @@ function M.pickup()
             0, 0,
             {
               end_col = #files[1],
-              hl_group = 'PmenuSel'
+              hl_group = M.opts.select_hl_group
            }
           )
         end
@@ -77,7 +85,7 @@ function M.pickup()
               i - 1, j,
               {
                 end_col = j + 1,
-                hl_group = M.opts.hl_group
+                hl_group = M.opts.match_hl_group
               }
             )
           end

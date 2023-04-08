@@ -16,7 +16,7 @@ use {
 }
 ```
 
-- `<C-p>` or `[lhs]`: to select a file
+- `<C-p>` or `[opts.lhs]`: to select a file
 - `<C-c>`: to cancel the selection
 
 # License
