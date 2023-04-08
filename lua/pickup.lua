@@ -1,17 +1,11 @@
 local M = {}
 
 function M.setup(_opts)
-  local opts = _opts or {}
-  local default = {
+  local M.opts = vim.tbl_extend(_opts, {
     hl_group = 'DiffAdd',
     border = { style = 'rounded' },
     lhs = '<C-p>'
-  }
-  M.opts = {
-    hl_group = opts.hl_group or default.hl_group,
-    border = opts.border or default.border,
-    lhs = opts.lhs or default.lhs
-  }
+  })
   if M.opts.lhs ~= '' then
     vim.keymap.set('n', M.opts.lhs, M.pickup, {})
   end
@@ -25,9 +19,7 @@ function M.pickup()
   local event = require('nui.utils.autocmd').event
   local path = ""
   local popup = Popup({
-    border = {
-      style = 'rounded'
-    },
+    border = M.opts.border,
     position = {
       row = 5,
       col = '50%'
@@ -46,9 +38,7 @@ function M.pickup()
     size = {
       width = '50%'
     },
-    border = {
-      style = 'rounded'
-    },
+    border = M.opts.border,
   }, {
     prompt = 'pattern: ',
     on_submit = function()
@@ -75,7 +65,7 @@ function M.pickup()
             0, 0,
             {
               end_col = #files[1],
-              hl_group = 'PmenuSel'
+              hl_group = M.hl_group
            }
           )
         end
