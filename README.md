@@ -16,7 +16,8 @@ use {
 }
 ```
 
-- `<C-p>` or `[lhs]`: to launch fuzzy finder
+- `<C-p>` or `[lhs]`: to select a file
+- `<C-c>`: to cancel the selection
 
 # License
 
