@@ -1,7 +1,7 @@
 local M = {}
 
 function M.setup(_opts)
-  local M.opts = vim.tbl_extend(_opts, {
+  M.opts = vim.tbl_extend(_opts, {
     hl_group = 'DiffAdd',
     border = { style = 'rounded' },
     lhs = '<C-p>'
@@ -65,7 +65,7 @@ function M.pickup()
             0, 0,
             {
               end_col = #files[1],
-              hl_group = M.hl_group
+              hl_group = 'PmenuSel'
            }
           )
         end
@@ -77,7 +77,7 @@ function M.pickup()
               i - 1, j,
               {
                 end_col = j + 1,
-                hl_group = 'DiffAdd'
+                hl_group = M.opts.hl_group
               }
             )
           end
